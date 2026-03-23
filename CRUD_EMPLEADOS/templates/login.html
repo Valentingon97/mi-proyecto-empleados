@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso - AF Marine Supply</title>
+    <style>
+        /* Estilos internos para que no dependa de internet */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 350px;
+            border-top: 8px solid #1e3a8a; /* Azul oscuro */
+        }
+        h2 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-sizing: border-box; /* Importante para el ancho */
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #1e3a8a;
+        }
+        button {
+            width: 100%;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #1e40af;
+        }
+        .error-msg {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+            border-left: 4px solid #ef4444;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2>AF Marine Supply</h2>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label>Usuario:</label>
+                <input type="text" name="usuario" placeholder="Ingresa tu usuario" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña:</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+            
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="error-msg">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+    </div>
+
+</body>
+</html>

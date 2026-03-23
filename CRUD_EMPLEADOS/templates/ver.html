@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white rounded-lg shadow-xl p-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Detalles del Empleado</h1>
+    
+    <div class="bg-gray-50 rounded-lg p-6 space-y-4">
+        <div class="flex border-b border-gray-200 pb-3">
+            <span class="font-semibold text-gray-600 w-40">ID:</span>
+            <span class="text-gray-900">{{ empleado.id }}</span>
+        </div>
+        
+        <div class="flex border-b border-gray-200 pb-3">
+            <span class="font-semibold text-gray-600 w-40">Nombre Completo:</span>
+            <span class="text-gray-900">{{ empleado.nombre }} {{ empleado.apellido }}</span>
+        </div>
+        
+        <div class="flex border-b border-gray-200 pb-3">
+            <span class="font-semibold text-gray-600 w-40">Cédula:</span>
+            <span class="text-gray-900">{{ empleado.cedula }}</span>
+        </div>
+        
+        <div class="flex border-b border-gray-200 pb-3">
+            <span class="font-semibold text-gray-600 w-40">Teléfono:</span>
+            <span class="text-gray-900">{{ empleado.telefono }}</span>
+        </div>
+        
+        <div class="flex border-b border-gray-200 pb-3">
+            <span class="font-semibold text-gray-600 w-40">Dirección:</span>
+            <span class="text-gray-900">{{ empleado.direccion }}</span>
+        </div>
+        
+        <div class="flex">
+            <span class="font-semibold text-gray-600 w-40">Fecha de Registro:</span>
+            <span class="text-gray-900">{{ empleado.fecha_registro }}</span>
+        </div>
+    </div>
+    
+    <div class="flex gap-4 mt-8">
+        <a href="{{ url_for('editar', id=empleado.id) }}" 
+           class="flex-1 text-center bg-yellow-500 text-white px-6 py-3 rounded-lg 
+                  hover:bg-yellow-600 transition font-semibold">
+            Editar Empleado
+        </a>
+        <a href="{{ url_for('index') }}" 
+           class="flex-1 text-center bg-gray-500 text-white px-6 py-3 rounded-lg 
+                  hover:bg-gray-600 transition font-semibold">
+            Volver a Lista
+        </a>
+        <form action="{{ url_for('eliminar', id=empleado.id) }}" 
+              method="post" class="flex-1"
+              onsubmit="return confirm('¿Está seguro de eliminar este empleado?')">
+            <button type="submit" 
+                    class="w-full bg-red-600 text-white px-6 py-3 rounded-lg 
+                           hover:bg-red-700 transition font-semibold">
+                Eliminar Empleado
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AF MARINE SUPPLY S.R.L.{% endblock %}</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Cambiado de indigo-600 a blue-800 para un azul más serio y profesional -->
+    <nav class="bg-blue-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="{{ url_for('index') }}" class="text-xl md:text-2xl font-bold hover:text-blue-200 transition">
+                AF MARINE SUPPLY S.R.L.
+            </a>
+            
+            <!-- Menú de Navegación -->
+            <div class="flex items-center space-x-2 md:space-x-4">
+                <a href="{{ url_for('index') }}" 
+                   class="hover:text-blue-200 transition hidden md:block">Inicio</a>
+                
+                <a href="{{ url_for('crear') }}" 
+                   class="bg-white text-blue-800 px-3 py-2 md:px-4 md:py-2 rounded-lg 
+                          hover:bg-blue-50 transition font-bold text-sm md:text-base">
+                    + Nuevo
+                </a>
+
+                <!-- Botón de Cerrar Sesión Rojo -->
+                <a href="{{ url_for('logout') }}" 
+                   class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg 
+                          font-bold transition text-sm md:text-base shadow-md"
+                   onclick="return confirm('¿Seguro que quieres salir del sistema?')">
+                   Salir
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-4 py-8">
+        <!-- Mensajes de Alerta (Flash) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="mb-6 p-4 rounded-lg shadow-md border-l-4 {% if category == 'success' %}
+                            bg-green-100 border-green-500 text-green-700
+                            {% else %}bg-red-100 border-red-500 text-red-700{% endif %}">
+                    <span class="font-bold">{% if category == 'success' %}¡Éxito!{% else %}Error:{% endif %}</span> {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Aquí se carga el contenido de cada página -->
+        {% block content %}{% endblock %}
+    </div>
+    
+    <footer class="bg-gray-900 text-white text-center py-6 mt-12 border-t-4 border-blue-800">
+        <p class="text-sm">AF MARINE SUPPLY S.R.L. &copy; 2026</p>
+        <p class="text-xs text-gray-500 mt-1">Sistema de Gestión de Empleados - Flask + SQLite3</p>
+    </footer>
+</body>
+</html>
